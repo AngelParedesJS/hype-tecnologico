@@ -1,0 +1,17 @@
+{
+  "name": "prueba-tecnica",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "app/api",
+    "app/client"
+  ],
+  "scripts": {
+    "start:dev": "concurrently \"npm run start:dev --workspace=app/api\" \"npm run start:dev --workspace=app/client\"",
+    "build": "npm run build --workspaces",
+    "clean": "npm run clean --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
