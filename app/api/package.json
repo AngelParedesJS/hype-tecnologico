@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start:dev": "nest start --watch"
+    "start:dev": "nest start --watch",
+    "test": "jest"
   },
   "dependencies": {
     "@nestjs/cli": "^11.0.0",
@@ -17,6 +18,8 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^20.11.0",
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.9",
     "typescript": "^5.3.3"
   }
 }
