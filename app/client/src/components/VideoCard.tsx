@@ -50,8 +50,11 @@ export function VideoCard({ video, isFeatured = false }: VideoCardProps) {
 
         <div className="video-meta">
           <span className="video-stats">{formatStats(statistics.viewCount, "vistas")}</span>
+          <span className="stat-dot">•</span>
           <span className="video-stats">{formatStats(statistics.likeCount, "likes")}</span>
+          <span className="stat-dot">•</span>
           <span className="video-stats">{formatStats(statistics.commentCount, "comentarios")}</span>
+          <span className="stat-dot">•</span>
           <span className="video-stats">{FriendlyDate}</span>
         </div>
       </div>

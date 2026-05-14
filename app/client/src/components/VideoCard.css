@@ -143,6 +143,11 @@
   color: #151515;
 }
 
+.stat-dot {
+  color: #252525;
+  font-size: 0.7rem;
+}
+
 .separator {
   display: none;
 }
