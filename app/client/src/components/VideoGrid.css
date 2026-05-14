@@ -1,8 +1,8 @@
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
 }
 
 .video-grid-empty {
@@ -10,12 +10,35 @@
   justify-content: center;
   align-items: center;
   min-height: 200px;
-  color: #888888;
+  color: #F5E8D8;
 }
 
-@media (max-width: 640px) {
+/* Featured card (1st, 5th, 9th...) - centered */
+.video-card.featured {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 480px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .video-card.featured {
+    grid-column: 1 / -1;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
   .video-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+  }
+  
+  .video-card.featured {
+    max-width: 100%;
   }
 }

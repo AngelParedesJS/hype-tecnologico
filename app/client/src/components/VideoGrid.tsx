@@ -17,8 +17,12 @@ export function VideoGrid({ videos }: VideoGridProps) {
 
   return (
     <section className="video-grid">
-      {videos.map((video) => (
-        <VideoCard key={video.video.id} video={video} />
+      {videos.map((video, index) => (
+        <VideoCard 
+          key={video.video.id} 
+          video={video}
+          isFeatured={index === 0}
+        />
       ))}
     </section>
   );

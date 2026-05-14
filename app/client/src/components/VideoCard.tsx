@@ -1,60 +1,58 @@
-import { useState } from 'react';
-import { VideoData } from '../types';
-import './VideoCard.css';
+import { VideoData } from "../types";
+import "./VideoCard.css";
 
 interface VideoCardProps {
   video: VideoData;
+  isFeatured?: boolean;
 }
 
-export function VideoCard({ video }: VideoCardProps) {
+export function VideoCard({ video, isFeatured = false }: VideoCardProps) {
   const { video: item, FriendlyDate, Hype } = video;
   const { snippet, statistics } = item;
-  
-  const [imgError, setImgError] = useState(false);
 
-  const formatNumber = (num?: string): string => {
-    if (!num) return '0';
+  const formatStats = (num?: string, stat?: string): string => {
+    if (!num) return `0 ${stat}`;
     const value = parseInt(num, 10);
     if (value >= 1_000_000) {
-      return `${(value / 1_000_000).toFixed(1)}M`;
+      return `${(value / 1_000_000).toFixed(1)}M ${stat}`;
     }
     if (value >= 1_000) {
-      return `${(value / 1_000).toFixed(1)}K`;
+      return `${(value / 1_000).toFixed(1)}K ${stat}`;
     }
-    return value.toString();
+    return `${value} ${stat}`;
   };
 
-  const thumbnailUrl = imgError 
-    ? `https://placehold.co/640x360/1e1e1e/667eea?text=${encodeURIComponent(snippet.channelTitle.charAt(0))}`
-    : snippet.thumbnails.high.url;
+  const getInitial = (name: string): string => {
+    return name.charAt(0).toUpperCase();
+  };
 
   return (
-    <article className="video-card">
+    <article className={`video-card ${isFeatured ? "featured" : ""}`}>
       <div className="thumbnail-container">
-        <img
-          src={thumbnailUrl}
+        {isFeatured && <div className="featured-label">LA JOYA DE LA CORONA</div>}
+        <img 
+          src={snippet.thumbnails.high.url}
           alt={snippet.title}
           className="thumbnail"
-          onError={() => setImgError(true)}
         />
-        <div className="hype-badge" title="Hype Score">
-          {Hype.toFixed(2)}
-        </div>
+        <div className="hype-badge">HYPE: {Hype}</div>
       </div>
 
       <div className="video-info">
+        <div className="channel-row">
+          <div className="channel-avatar">
+            {getInitial(snippet.channelTitle)}
+          </div>
+          <span className="channel-name">{snippet.channelTitle}</span>
+        </div>
+
         <h3 className="video-title">{snippet.title}</h3>
-        
-        <p className="channel-name">{snippet.channelTitle}</p>
-        
-        <div className="video-stats">
-          <span>{formatNumber(statistics.viewCount)} Vistas</span>
-          <span className="separator">•</span>
-          <span>{formatNumber(statistics.likeCount)} Likes</span>
-          <span className="separator">•</span>
-          <span>{formatNumber(statistics.commentCount)} Comentarios</span>
-          <span className="separator">•</span>
-          <span>{FriendlyDate}</span>
+
+        <div className="video-meta">
+          <span className="video-stats">{formatStats(statistics.viewCount, "vistas")}</span>
+          <span className="video-stats">{formatStats(statistics.likeCount, "likes")}</span>
+          <span className="video-stats">{formatStats(statistics.commentCount, "comentarios")}</span>
+          <span className="video-stats">{FriendlyDate}</span>
         </div>
       </div>
     </article>
