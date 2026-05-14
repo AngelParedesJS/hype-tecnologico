@@ -1,4 +1,5 @@
-# Prueba Tecnica - Monorepo
+![NestJS + React Architecture](app/assets/images/NestJS-logo-wordmark.svg.png)
+# HYPE TECNOLÓGICO - Monorepo
 
 NestJS API + React (Vite) monorepo con npm workspaces.
 
